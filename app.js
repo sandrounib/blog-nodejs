@@ -1,5 +1,7 @@
 const express = require('express');
 
+var conexao = require('./conexaoBanco');
+
 
 //Express aplicativo - configurando o acesso as funções
 const app = express();
@@ -8,6 +10,36 @@ const app = express();
 //registrar a viasualização da engenharia
 //depois disso tive que mudar minhas extensões .html para .ejs
 app.set('view engine', 'ejs')
+
+
+var bodyparser = require('body-parser');
+
+app.use(bodyparser.json());
+
+app.use(bodyparser.urlencoded({ extended: true}));
+
+conexao.connect(function(error){
+    if(error){
+        console.log("Erro ao conectar ao banco de dados", error);
+        process.exit();
+    }
+});
+
+
+
+app.post('/', function(req,res) {
+    var titulodoblog = req.body.titulodoblog;
+    var textocurtodoblog = req.body.textocurtodoblog;
+    var conteudoblog = req.body.conteudoblog;  
+    
+    var sql = "INSERT INTO novoblog(titulodoblog, textocurtodoblog, conteudoblog) VALUES(?, ?, ?)";
+    conexao.query(sql, [titulodoblog, textocurtodoblog, conteudoblog], function(error, result){
+    if(error) throw error;
+
+    res.send("Novo Blog cadastrado com sucesso! " + result.insertId);
+});
+});
+
 
 //ouvindo as requisições na porta
 app.listen(3001);
