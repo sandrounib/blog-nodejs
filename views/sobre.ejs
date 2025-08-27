@@ -18,15 +18,11 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Aula de Node.js</title> -->
-    <title>Blog</title>
-</head>
-<body> 
 
-    <nav>
+ <%- include('./parciais/head.ejs') %>
+<body> 
+<!-- antes só tinha essa nav abaixo dai pediu para apagar ela mas, não vou apagar vou comentar testa e veja que vai sumir a nav de http://localhost:3001/sobre-->
+    <!-- <nav>
         <div class="titulo-site">
             <a href="/"><h1>Blog</h1></a>
             <p>Site</p>
@@ -36,11 +32,11 @@
             <li><a href="/sobre">Blog</a>Sobre</li>
             <li><a href="/blog/criar">Novo Blog</a></li>
         </ul>
-    </nav>
-
+    </nav> -->
+    <%- include('./parciais/nav.ejs') %>
     <div class="conteudo-blog">
         <h2>Tela Sobre a Empresa</h2>
     </div>
-    
+    <%- include('./parciais/footer.ejs') %>
 </body>
 </html>

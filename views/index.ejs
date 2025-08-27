@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Aula de Node.js</title> -->
-    <title>Blog</title>
-</head>
+
+<!-- retirei o head daqui e levei lá para o arquivo head.ejs -->
+ <%- include('./parciais/head.ejs') %>
 <body>
     <!-- <h1>Index</h1>
     <h2>Aula de Node.js do meu negócio</h2>
@@ -14,21 +11,49 @@
         <a href="/sobre">Página Index</a>
     </nav> -->
 
-    <nav>
+    <!-- antes de criar as parciais -->
+    <!-- <nav>
         <div class="titulo-site">
             <a href="/"><h1>Blog</h1></a>
             <p>Site</p>
         </div>
         <ul>
             <li><a href="/">Blog</a></li>
-            <li><a href="/sobre">Blog</a>Sobre</li>
+            <li><a href="/sobre">Sobre</a></li>
             <li><a href="/blog/criar">Novo Blog</a></li>
         </ul>
-    </nav>
+    </nav> -->
 
-    <div class="conteudo-blog">
+    <!-- ANTES SEM O ELSE -->
+
+    <!-- <div class="conteudo-blog">
         <h2>todo Blog</h2>
+        <% if (blogs.length > 0 ){ %>
+        <% blogs.forEach(blog => { %>
+
+                <h3 class="titulo"><%= blog.titulo %></h3>                
+                <p class="conteudo"><%= blog.conteudo %></p>            
+
+        <% }) %>
+        <% } %>
+    </div> -->
+
+    <!-- Inclusão de parcial NAV a linha abaixo do include foi criada após as parciais-->
+    <%- include('./parciais/nav.ejs') %>
+    <!-- COM ELSE obs. para testar você precisa comentar oArray que está lá em app.js  linha 40  const blogs = [-->
+     <div class="conteudo-blog">
+        <h2>Todo Blog</h2>
+        <% if (blogs.length > 0 ){ %>
+        <% blogs.forEach(blog => { %>
+
+                <h3 class="titulo"><%= blog.titulo %></h3>                
+                <p class="conteudo"><%= blog.conteudo %></p>            
+
+        <% }) %>
+        <% } else { %>
+            <p>A lista do Blog está vazia</p>
+        <% } %>
     </div>
-    
+    <%- include('./parciais/footer.ejs') %>
 </body>
 </html>
